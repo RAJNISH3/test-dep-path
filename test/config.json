@@ -1,0 +1,4 @@
+{
+  "env": "main",
+  "apiUrl": "https://api.example.com/main"
+}

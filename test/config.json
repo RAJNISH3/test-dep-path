@@ -1,4 +1,5 @@
 {
-  "env": "main",
-  "apiUrl": "https://api.example.com/main"
+  "env": "dev",
+  "apiUrl": "https://api.example.com/dev",
+  "debug": true
 }

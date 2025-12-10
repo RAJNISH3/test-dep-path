@@ -1,6 +1,5 @@
 {
   "env": "dev",
   "apiUrl": "https://api.example.com/dev",
-  "debug": true,
-  "branch": "development"
+  "debug": true
 }

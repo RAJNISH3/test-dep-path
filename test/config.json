@@ -1,6 +1,4 @@
 {
-  "env": "test",
-  "apiUrl": "https://api.example.com/test",
-  "mock": true,
-  "timeoutMs": 2000
+  "env": "main",
+  "apiUrl": "https://api.example.com/main"
 }

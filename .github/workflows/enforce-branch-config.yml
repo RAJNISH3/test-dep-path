@@ -1,0 +1,24 @@
+name: Enforce branch-specific config
+
+on:
+  push:
+    branches:
+      - main
+      - dev
+      - test
+
+jobs:
+  set-config:
+    # Avoid loops when the workflow pushes a commit
+    if: ${{ github.actor != 'github-actions[bot]' }}
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          persist-credentials: true
+
+      - name: Ensure test/config.json matches branch
+        run: bash scripts/enforce-config.sh

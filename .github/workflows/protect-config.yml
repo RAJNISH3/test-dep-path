@@ -23,8 +23,21 @@ jobs:
           files: |
             test/config.json
 
-      - name: Block PR if config.json changed
+      - name: Warn on PR if config.json changed
         if: steps.changed.outputs.any_changed == 'true'
         run: |
-          echo "::error::Changes to test/config.json are not allowed in PRs. Keep branch-specific config in the target branch."
-          exit 1
+          echo "::warning::test/config.json is branch-specific and will be kept from the base branch during merge."
+
+      - name: Comment on PR
+        if: steps.changed.outputs.any_changed == 'true'
+        uses: actions/github-script@v7
+        with:
+          script: |
+            const pr = context.payload.pull_request;
+            const body = `⚠️ The file test/config.json is enforced per-branch and should not be changed via PRs.\n\nDuring merge, the base branch's version will be kept.`;
+            await github.rest.issues.createComment({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              issue_number: pr.number,
+              body
+            });
